@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:neumorphic_container/neumorphic_container.dart';
 import 'package:web3dart/web3dart.dart';
 
@@ -17,6 +18,19 @@ class _HomePageState extends State<HomePage> {
   final myAddress = "0xEdBb3D1339115fFBeF919111589C651e196adcb1";
   bool data = false;
   int _value = 0;
+
+  @override
+  void initState() {
+    httpClient = Client();
+    ethClient = Web3Client(
+        "https://rinkeby.infura.io/v3/aca9fdfd7ee246588cb175d5358156a7",
+        httpClient);
+    getBalance(myAddress);
+    super.initState();
+  }
+
+  Future<void> getBalance(String targetAddress)
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
